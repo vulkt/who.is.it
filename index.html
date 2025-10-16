@@ -3,367 +3,376 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Starzone</title>
+    <title>Fight for Love (Club)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Inline CSS */
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            box-sizing: border-box;
         }
 
         body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #fdf2f8 0%, #fff1f2 50%, #ffebee 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 32px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(244, 67, 54, 0.1);
+            border: 1px solid rgba(251, 191, 191, 0.5);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            color: #ec4899;
+            z-index: 1;
+            pointer-events: none;
+            animation: floatUp 3s ease-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-200px) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #e11d48;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+
+        p {
+            font-size: 1.125rem;
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        .options {
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
-            color: #333;
-            background-color: #f3f3f3;
+            gap: 16px;
+            margin-bottom: 24px;
         }
 
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        header h1 {
-            font-size: 3rem;
-            font-weight: bold;
-            margin: 0;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            font-style: italic;
-            margin-top: 10px;
-            color: #f1f1f1;
-        }
-
-        main {
-            flex: 1;
-            padding: 1.5rem;
-            text-align: center;
-        }
-
-        .button-container {
+        .option-btn {
+            background: #fdf2f8;
+            border: 2px solid #fbcfe8;
+            border-radius: 16px;
+            padding: 16px 20px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #374151;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
             display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .button {
-            padding: 0.8rem 1.5rem;
-            background-color: #4CAF50;
+        .option-btn:hover {
+            background: #fce7f3;
+            border-color: #f9a8d4;
+            transform: scale(1.02);
+        }
+
+        .option-btn .heart-icon {
+            color: #ec4899;
+            font-size: 20px;
+        }
+
+        .btn {
+            background: #e11d48;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 999px;
+            padding: 16px 32px;
+            font-size: 1.125rem;
+            font-weight: 700;
             cursor: pointer;
-            font-size: 1rem;
-            text-transform: uppercase;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
         }
 
-        .button:hover {
-            background-color: #45a049;
+        .btn:hover {
+            background: #be123c;
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(225, 29, 72, 0.4);
         }
 
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1rem;
+        .fade-in {
+            animation: fadeIn 0.6s ease-in-out;
         }
 
-        /* Add Subscriber Page */
-        #add-subscriber-form {
-            margin-top: 2rem;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        input, button {
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            font-size: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        .form-container {
-            text-align: center;
-        }
-
-        /* Centering QR code in the middle of the page */
-        #qr-code-container {
+        .final-hearts {
             display: flex;
             justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            height: 100vh;
+            gap: 12px;
+            margin-top: 24px;
         }
 
-        #qr-code {
-            margin-top: 2rem;
+        .final-heart {
+            font-size: 32px;
+            color: #ec4899;
+            animation: pulse 2s infinite;
         }
 
-        /* Camera Stream */
-        #scanner-container {
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 80vh;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
         }
 
-        video {
-            border: 2px solid #333;
-            width: 100%;
-            max-width: 600px;
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.25rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .container {
+                padding: 24px;
+            }
         }
     </style>
 </head>
 <body>
-
-    <header>
-        <h1>Starzone</h1>
-        <p>Your go-to place</p>
-    </header>
-
-    <main id="main-content">
-        <!-- Main Page Content -->
-        <div class="button-container">
-            <button class="button" onclick="navigateToAddSubscriber()">Add New Subscriber</button>
-            <button class="button" onclick="scanQR()">Scan QR</button>
-            <button class="button" onclick="manageSubscribers()">Manage Subscribers</button>
-        </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Starzone</p>
-    </footer>
-
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
-
-    <!-- QR Code Library -->
-    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <div class="container" id="gameContainer">
+        <!-- Content will be dynamically inserted by JavaScript -->
+    </div>
 
     <script>
-        // Firebase configuration (replace with your config)
-        const firebaseConfig = {
-            apiKey: "AIzaSyDP4vpEvCvDrJoppLU8r_G2s6-xikTdnHQ",
-            authDomain: "starzone-a52fe.firebaseapp.com",
-            projectId: "starzone-a52fe",
-            storageBucket: "starzone-a52fe.appspot.com",
-            messagingSenderId: "148135330855",
-            appId: "1:148135330855:web:0921a8b431e847a5107a02",
-            measurementId: "G-23TC6CH8BE"
-        };
+        const steps = [
+            {
+                type: 'intro',
+                title: "Fight for Love (Club)",
+                text: "Hey love… I know I kinda messed up tonight. This little game is my way of saying sorry. No spoilers, but the ending’s all about us ❤️",
+                buttonText: "Start Game"
+            },
+            {
+                type: 'question',
+                question: "So… who was the one waiting to watch Fight Club?",
+                options: [
+                    { text: "Me 😤", response: "Yep, that’s true. I owe you big time for being patient." },
+                    { text: "Still me 😒", response: "Yep, that’s true. I owe you big time for being patient." },
+                    { text: "Definitely me 💔", response: "Yep, that’s true. I owe you big time for being patient." }
+                ]
+            },
+            {
+                type: 'question',
+                question: "And who got stuck on a phone call for TWO HOURS?",
+                options: [
+                    { text: "You 😑", response: "Guilty as charged… I should’ve hung up way sooner. You matter more than any call." },
+                    { text: "The distracted one 😅", response: "Guilty as charged… I should’ve hung up way sooner. You matter more than any call." },
+                    { text: "My lovely but forgetful boyfriend 💬", response: "Guilty as charged… I should’ve hung up way sooner. You matter more than any call." }
+                ]
+            },
+            {
+                type: 'question',
+                question: "How did you feel watching Fight Club alone?",
+                options: [
+                    { text: "Kinda sad 😔", response: "That hurts to hear. I wish I could’ve been there — not just on the screen, but really there with you." },
+                    { text: "Lowkey mad 😤", response: "That hurts to hear. I wish I could’ve been there — not just on the screen, but really there with you." },
+                    { text: "Just lonely 💭", response: "That hurts to hear. I wish I could’ve been there — not just on the screen, but really there with you." }
+                ]
+            },
+            {
+                type: 'question',
+                question: "What part did you miss having me there for?",
+                options: [
+                    { text: "The funny moments", response: "That last one got me. I miss our little comments during movies — it’s not the same without you." },
+                    { text: "The plot twist 😮", response: "That last one got me. I miss our little comments during movies — it’s not the same without you." },
+                    { text: "Just talking to you during it ❤️", response: "That last one got me. I miss our little comments during movies — it’s not the same without you." }
+                ]
+            },
+            {
+                type: 'question',
+                question: "What should I do to make it up to you?",
+                options: [
+                    { text: "Movie night redo 🍿", response: "Done deal. You name the time — this time, I’ll give you 100% of me." },
+                    { text: "Surprise video call 📱", response: "Done deal. You name the time — this time, I’ll give you 100% of me." },
+                    { text: "Send snacks and love 💌", response: "Done deal. You name the time — this time, I’ll give you 100% of me." }
+                ]
+            },
+            {
+                type: 'question',
+                question: "Do you think I’ve learned my lesson?",
+                options: [
+                    { text: "Maybe... 🤨", response: "Fair enough. I know words are easy — but I’ll prove it with actions." },
+                    { text: "We’ll see 😏", response: "Fair enough. I know words are easy — but I’ll prove it with actions." },
+                    { text: "I’ll believe it when I see it 😜", response: "Fair enough. I know words are easy — but I’ll prove it with actions." }
+                ]
+            },
+            {
+                type: 'question',
+                question: "Be honest… do you still love me a little?",
+                options: [
+                    { text: "Maybe a little 😘", response: "You just made my heart smile. I’m lucky to have you — even when I don’t deserve it." },
+                    { text: "More than a little ❤️", response: "You just made my heart smile. I’m lucky to have you — even when I don’t deserve it." },
+                    { text: "Always, even when you mess up 💕", response: "You just made my heart smile. I’m lucky to have you — even when I don’t deserve it." }
+                ]
+            },
+            {
+                type: 'final',
+                title: "You win. I’m sorry, and I love you ❤️",
+                text: "Even though we’re miles apart, I still feel close to you. I promise I’ll make it up to you next movie night — no phones, no calls, just us.",
+                buttonText: "Forgive Him?"
+            }
+        ];
 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+        let currentStep = 0;
+        let showResponse = false;
+        const container = document.getElementById('gameContainer');
 
-      // Function to add new subscriber to Firestore and generate QR code
-function addSubscriber() {
-    const name = document.getElementById('subscriber-name').value;
-    const hours = parseInt(document.getElementById('hours').value, 10);
-    const minutes = parseInt(document.getElementById('minutes').value, 10);
-    const totalTime = (hours * 60) + minutes;  // Convert time to minutes
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
 
-    if (!name || isNaN(hours) || isNaN(minutes)) {
-        alert("Please fill in all fields with valid data.");
-        return;
-    }
-
-    // Create a new subscriber document
-    db.collection("subscribers").add({
-        name: name,
-        timeInMinutes: totalTime
-    })
-    .then((docRef) => {
-        alert("Subscriber added successfully!");
-
-        // Update the page to show the QR code
-        document.getElementById('main-content').innerHTML = `
-            <div id="qr-code-container">
-                <h2>QR Code for ${name}</h2>
-                <div id="qr-code"></div> <!-- This is where the QR code will be displayed -->
-                <button class="button" onclick="goToHomePage()">Go to Home</button>
-            </div>
-        `;
-
-        // Delay QR code generation to ensure DOM is updated
-        setTimeout(() => {
-            generateQRCode(docRef.id);  // Generate QR code with the document ID
-        }, 100);
-    })
-    .catch((error) => {
-        console.error("Error adding subscriber: ", error);
-        alert("Error adding subscriber. Please try again.");
-    });
-}
-
-// Add this in the "Add New Subscriber" page after submitting the form
-function navigateToAddSubscriber() {
-    document.getElementById('main-content').innerHTML = `
-        <div class="form-container">
-            <h2>Add New Subscriber</h2>
-            <form id="add-subscriber-form">
-                <input type="text" id="subscriber-name" placeholder="Subscriber Name" required>
-                <input type="number" id="hours" placeholder="Hours" required>
-                <input type="number" id="minutes" placeholder="Minutes" required>
-                <button type="button" class="button" onclick="addSubscriber()">Add Subscriber</button>
-                <button type="button" class="button" onclick="goToHomePage()">Go to Home</button> <!-- New button added here -->
-            </form>
-        </div>
-    `;
-}
-
-
-        // Function to generate QR code with the Firestore document ID
-        function generateQRCode(docId) {
-            const qrContainer = document.getElementById('qr-code');
-
-            if (qrContainer) {
-                // Clear any existing QR code
-                qrContainer.innerHTML = '';
-
-                // Generate the new QR code
-                new QRCode(qrContainer, {
-                    text: docId, // Set the document ID as the QR code content
-                    width: 128,
-                    height: 128
-                });
-            } else {
-                console.error('QR code container not found.');
+        function createMultipleHearts(count) {
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    createHeart();
+                }, i * 200);
             }
         }
 
-       // Variable to store the camera stream
-let currentStream = null;
+        function renderStep() {
+            const step = steps[currentStep];
+            container.innerHTML = '';
+            container.className = 'container fade-in';
 
-function goToHomePage() {
-    // Stop the camera stream if it's active
-    if (currentStream) {
-        currentStream.getTracks().forEach(track => track.stop());
-        currentStream = null;  // Clear the stream reference
-    }
-
-    // Update the main content to show the home page buttons
-    document.getElementById('main-content').innerHTML = `
-        <div class="button-container">
-            <button class="button" onclick="navigateToAddSubscriber()">Add New Subscriber</button>
-            <button class="button" onclick="scanQR()">Scan QR</button>
-            <button class="button" onclick="manageSubscribers()">Manage Subscribers</button>
-        </div>
-    `;
-}
-
-
-        // Scan QR Page
-        function scanQR() {
-            document.getElementById('main-content').innerHTML = `
-                <div id="scanner-container">
-                    <video id="scanner" width="100%" height="auto"></video>
-                    <button class="button" onclick="goToHomePage()">Go to Home</button>
-                </div>
-            `;
-            startScanner();
+            if (step.type === 'intro') {
+                container.innerHTML = `
+                    <h1>${step.title}</h1>
+                    <p>${step.text}</p>
+                    <button class="btn" onclick="nextStep()">${step.buttonText}</button>
+                `;
+            } else if (step.type === 'question') {
+                if (!showResponse) {
+                    let optionsHTML = '';
+                    step.options.forEach((option, index) => {
+                        optionsHTML += `
+                            <button class="option-btn" onclick="selectOption(${index})">
+                                ${option.text}
+                                <span class="heart-icon">❤️</span>
+                            </button>
+                        `;
+                    });
+                    
+                    container.innerHTML = `
+                        <h2>${step.question}</h2>
+                        <div class="options">${optionsHTML}</div>
+                    `;
+                } else {
+                    container.innerHTML = `
+                        <p>${step.options[0].response}</p>
+                        <button class="btn" onclick="nextStep()">Continue</button>
+                    `;
+                }
+            } else if (step.type === 'final') {
+                if (!window.showFinalMessage) {
+                    container.innerHTML = `
+                        <h1>${step.title}</h1>
+                        <p>${step.text}</p>
+                        <button class="btn" onclick="forgiveHim()">${step.buttonText}</button>
+                    `;
+                } else {
+                    container.innerHTML = `
+                        <p style="font-size: 1.5rem; font-weight: 700; color: #e11d48;">Forgiven… but next time, pick the movie 😏🎬</p>
+                        <div class="final-hearts">
+                            <span class="final-heart">❤️</span>
+                            <span class="final-heart">❤️</span>
+                            <span class="final-heart">❤️</span>
+                            <span class="final-heart">❤️</span>
+                            <span class="final-heart">❤️</span>
+                        </div>
+                    `;
+                }
+            }
         }
 
-        let cameraStream = null; // Declare a variable to hold the camera stream
-
-// Modify startScanner to store the stream
-function startScanner() {
-    const videoElement = document.getElementById('scanner');
-    const constraints = { video: { facingMode: 'environment' } };
-
-    navigator.mediaDevices.getUserMedia(constraints)
-        .then((stream) => {
-            videoElement.srcObject = stream;
-            videoElement.setAttribute('playsinline', true);
-            videoElement.play();
-            currentStream = stream; // Store the stream reference
-            setupQRCodeScanner(videoElement);
-        })
-        .catch((err) => {
-            console.error('Error accessing camera: ', err);
-            alert("Camera access is required for QR scanning.");
-        });
-}
-
-
-
-       // Modify the QR scanning callback to stop the camera after scanning
-function setupQRCodeScanner(videoElement) {
-    const qrCodeReader = new ZXing.BrowserQRCodeReader();
-
-    qrCodeReader.decodeFromVideoDevice(null, videoElement, (result, err) => {
-        if (result) {
-            alert("QR Code Scanned: " + result.getText());
-            // Stop the camera stream
-            stopCamera();
-            // Start countdown
-            startCountdown(result.getText());
-        }
-    });
-}
-
-// Add a function to stop the camera stream
-function stopCamera() {
-    if (cameraStream) {
-        cameraStream.getTracks().forEach(track => track.stop()); // Stop all tracks
-        cameraStream = null; // Clear the stored stream
-    }
-}
-
-// Stop the camera when the user leaves the page
-window.onbeforeunload = function() {
-    stopCamera(); // Stop the camera stream before leaving the page
-};
-
-
-        let countdownTimer;
-        let remainingTime;
-
-        function startCountdown(docId) {
-            // Fetch the subscriber document from Firestore
-            db.collection("subscribers").doc(docId).get()
-                .then((doc) => {
-                    if (doc.exists) {
-                        const totalTime = doc.data().timeInMinutes; // Get total time from Firestore
-                        remainingTime = totalTime * 60; // Convert to seconds
-                        updateCountdownDisplay();
-                        countdownTimer = setInterval(() => {
-                            remainingTime--;
-                            updateCountdownDisplay();
-                            if (remainingTime <= 0) {
-                                clearInterval(countdownTimer);
-                                alert("Time's up!");
-                            }
-                        }, 1000);
-                    }
-                })
-                .catch((error) => {
-                    console.error("Error fetching subscriber: ", error);
-                    alert("Error fetching subscriber. Please try again.");
-                });
+        function nextStep() {
+            if (showResponse) {
+                showResponse = false;
+                currentStep++;
+            } else {
+                currentStep++;
+            }
+            renderStep();
         }
 
-        function updateCountdownDisplay() {
-            const minutes = Math.floor(remainingTime / 60);
-            const seconds = remainingTime % 60;
-            document.getElementById('scanner-container').innerHTML = `
-                <h2>Time Remaining: ${minutes}:${seconds < 10 ? '0' + seconds : seconds}</h2>
-                <button class="button" onclick="goToHomePage()">Go to Home</button>
-            `;
+        function selectOption(optionIndex) {
+            showResponse = true;
+            createMultipleHearts(5);
+            renderStep();
         }
+
+        function forgiveHim() {
+            window.showFinalMessage = true;
+            createMultipleHearts(20);
+            renderStep();
+        }
+
+        // Initialize the game
+        renderStep();
     </script>
-
 </body>
 </html>
